@@ -1,0 +1,8 @@
+<svg width="900" height="1100" viewBox="0 0 900 1100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="1100" fill="#050505"/>
+  <rect x="44" y="44" width="812" height="1012" rx="48" fill="#0d0d0d" stroke="#1F7CFF" stroke-width="8"/>
+  <path d="M236 220L328 144H572L664 220L612 340L552 310V890H348V310L288 340L236 220Z" fill="#111111" stroke="#1F7CFF" stroke-width="10"/>
+  <text x="450" y="514" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="900" letter-spacing="-6">GET</text>
+  <text x="450" y="610" text-anchor="middle" fill="#1F7CFF" font-family="Arial, Helvetica, sans-serif" font-size="84" font-weight="900" letter-spacing="-5">RICH</text>
+  <text x="450" y="960" text-anchor="middle" fill="#FFFFFF" opacity="0.55" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900" letter-spacing="6">STEP CORRECT</text>
+</svg>

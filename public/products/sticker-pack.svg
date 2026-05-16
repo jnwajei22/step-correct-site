@@ -1,0 +1,9 @@
+<svg width="900" height="1100" viewBox="0 0 900 1100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="1100" fill="#050505"/>
+  <rect x="44" y="44" width="812" height="1012" rx="48" fill="#0d0d0d" stroke="#1F7CFF" stroke-width="8"/>
+  <rect x="178" y="230" width="260" height="210" rx="38" fill="#1F7CFF"/>
+  <rect x="462" y="320" width="260" height="210" rx="38" fill="#ffffff"/>
+  <rect x="234" y="570" width="360" height="230" rx="38" fill="#111111" stroke="#1F7CFF" stroke-width="8"/>
+  <text x="450" y="690" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="900" letter-spacing="-5">STICKERS</text>
+  <text x="450" y="960" text-anchor="middle" fill="#FFFFFF" opacity="0.55" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900" letter-spacing="6">STEP CORRECT</text>
+</svg>

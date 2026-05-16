@@ -30,25 +30,28 @@ export default function Home() {
 
       <main className="site">
         <section className="container hero" id="top">
-
           <h1 className="hero-title">
-            <span>Stand Ten toes down.</span>
-            <span>STEP CORRECT.</span>
+            <span>Stand ten</span>
+            <span>Toes down</span>
+            <span>And</span>
+            <span className="hero-title-accent">Step Correct.</span>
           </h1>
 
-          <p className="hero-copy">
-            Step Correct is a streetwear and sticker brand built around intent,
-            confidence, and showing up like your next move matters.
-          </p>
+          <div className="hero-lower">
+            <p className="hero-copy">
+              Step Correct is a brand built around intent,
+              confidence, and showing up like your next move matters.
+            </p>
 
-          <div className="actions">
-            <a className="btn primary" href="/drop">
-              Preview the Drop
-            </a>
+            <div className="actions">
+              <a className="btn primary" href="/drop">
+                Preview the Drop
+              </a>
 
-            <a className="btn" href="/story">
-              Read the Story
-            </a>
+              <a className="btn" href="/story">
+                Read the Story
+              </a>
+            </div>
           </div>
         </section>
 

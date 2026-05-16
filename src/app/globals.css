@@ -1,16 +1,24 @@
 :root {
   --bg: #050505;
-  --bg-soft: #0d0d0d;
+  --bg-soft: #101014;
   --fg: #ffffff;
-  --muted: rgba(255, 255, 255, 0.68);
-  --muted-strong: rgba(255, 255, 255, 0.82);
-  --line: rgba(255, 214, 0, 0.24);
-  --line-soft: rgba(255, 255, 255, 0.12);
-  --card: rgba(255, 255, 255, 0.055);
-  --card-strong: rgba(255, 255, 255, 0.085);
-  --yellow: #ffd600;
-  --yellow-soft: rgba(255, 214, 0, 0.16);
+  --muted: rgba(255, 255, 255, 0.76);
+  --muted-strong: rgba(255, 255, 255, 0.9);
+
+  --line: rgba(43, 126, 255, 0.32);
+  --line-soft: rgba(255, 255, 255, 0.18);
+
+  --card: rgba(255, 255, 255, 0.085);
+  --card-strong: rgba(255, 255, 255, 0.13);
+
+  /* Kept this variable name so the existing CSS/classes keep working. */
+  --yellow: #2b7eff;
+  --yellow-soft: rgba(43, 126, 255, 0.16);
+
+  --blue: #2b7eff;
+  --blue-soft: rgba(43, 126, 255, 0.16);
   --black: #000000;
+
   --radius-lg: 2rem;
   --radius-md: 1.35rem;
   --max-width: 1200px;
@@ -28,8 +36,8 @@ body {
   margin: 0;
   color: var(--fg);
   background:
-    radial-gradient(circle at 12% 0%, rgba(255, 214, 0, 0.2), transparent 26rem),
-    radial-gradient(circle at 90% 12%, rgba(255, 214, 0, 0.1), transparent 30rem),
+    radial-gradient(circle at 12% 0%, rgba(43, 126, 255, 0.22), transparent 26rem),
+    radial-gradient(circle at 90% 12%, rgba(255, 255, 255, 0.08), transparent 30rem),
     linear-gradient(180deg, #000 0%, var(--bg) 44%, #000 100%);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -51,7 +59,7 @@ button {
 }
 
 ::selection {
-  color: var(--black);
+  color: var(--fg);
   background: var(--yellow);
 }
 
@@ -84,18 +92,18 @@ button {
   margin: 0.35rem 0 0;
   color: var(--fg);
   font-size: clamp(2.2rem, 5vw, 4.8rem);
-  font-weight: 950;
-  line-height: 0.88;
-  letter-spacing: -0.075em;
-  text-transform: uppercase;
+  font-weight: 850;
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+  text-transform: none;
 }
 
 .kicker {
   margin: 0;
   color: var(--yellow);
   font-size: 0.78rem;
-  font-weight: 950;
-  letter-spacing: 0.16em;
+  font-weight: 800;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -121,12 +129,12 @@ p {
   min-height: 2.8rem;
   padding: 0 1.1rem;
   color: var(--fg);
-  background: rgba(255, 255, 255, 0.055);
+  background: rgba(255, 255, 255, 0.075);
   border: 1px solid var(--line-soft);
   border-radius: 999px;
   font-size: 0.78rem;
-  font-weight: 950;
-  letter-spacing: 0.1em;
+  font-weight: 750;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   transition:
     transform 160ms ease,
@@ -137,13 +145,13 @@ p {
 
 .btn:hover {
   transform: translateY(-1px);
-  color: var(--yellow);
+  color: var(--fg);
   border-color: var(--yellow);
-  background: rgba(255, 214, 0, 0.08);
+  background: rgba(43, 126, 255, 0.12);
 }
 
 .btn.primary {
-  color: var(--black);
+  color: var(--fg);
   background: var(--yellow);
   border-color: var(--yellow);
 }
@@ -157,20 +165,26 @@ p {
 .text-link {
   display: inline-flex;
   margin-top: 1.2rem;
-  color: var(--yellow);
+  color: var(--fg);
   font-size: 0.85rem;
-  font-weight: 950;
-  letter-spacing: 0.1em;
+  font-weight: 750;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.text-link:hover {
+  color: var(--yellow);
 }
 
 /* Header */
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
   z-index: 50;
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
@@ -178,6 +192,21 @@ p {
   background: rgba(0, 0, 0, 0.86);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(18px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.site-header-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.site-header-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
 }
 
 .site-logo {
@@ -185,8 +214,8 @@ p {
   align-items: center;
   gap: 0.75rem;
   color: var(--fg);
-  font-weight: 950;
-  letter-spacing: -0.04em;
+  font-weight: 850;
+  letter-spacing: -0.035em;
 }
 
 .site-logo-mark {
@@ -194,13 +223,13 @@ p {
   place-items: center;
   width: 2.45rem;
   height: 2.45rem;
-  color: var(--black);
+  color: var(--fg);
   background: var(--yellow);
   border: 1px solid var(--yellow);
   border-radius: 999px;
   font-size: 0.85rem;
-  font-weight: 950;
-  letter-spacing: -0.06em;
+  font-weight: 850;
+  letter-spacing: -0.04em;
 }
 
 .site-logo-text {
@@ -214,10 +243,10 @@ p {
 }
 
 .site-nav-link {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.76);
   font-size: 0.82rem;
-  font-weight: 850;
-  letter-spacing: 0.12em;
+  font-weight: 650;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   transition: color 160ms ease;
 }
@@ -238,12 +267,12 @@ p {
   justify-content: center;
   min-height: 2.55rem;
   padding: 0 1rem;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.76);
   border: 1px solid var(--line-soft);
   border-radius: 999px;
   font-size: 0.76rem;
-  font-weight: 950;
-  letter-spacing: 0.1em;
+  font-weight: 750;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   transition:
     color 160ms ease,
@@ -253,9 +282,9 @@ p {
 }
 
 .site-cart-link:hover {
-  color: var(--yellow);
+  color: var(--fg);
   border-color: var(--yellow);
-  background: rgba(255, 214, 0, 0.08);
+  background: rgba(43, 126, 255, 0.12);
   transform: translateY(-1px);
 }
 
@@ -265,59 +294,81 @@ p {
   justify-content: center;
   min-height: 2.55rem;
   padding: 0 1rem;
-  color: var(--black);
+  color: var(--fg);
   background: var(--yellow);
   border: 1px solid var(--yellow);
   border-radius: 999px;
   font-size: 0.76rem;
-  font-weight: 950;
-  letter-spacing: 0.1em;
+  font-weight: 750;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   transition:
     transform 160ms ease,
     background 160ms ease,
-    border-color 160ms ease;
+    border-color 160ms ease,
+    color 160ms ease;
 }
 
 .site-header-cta:hover {
   transform: translateY(-1px);
+  color: var(--black);
   background: var(--fg);
   border-color: var(--fg);
 }
 
 /* Homepage hero */
 
+.hero .actions {
+  display: none;
+}
+
 .hero {
-  padding-top: clamp(5rem, 10vw, 9rem);
-  padding-bottom: clamp(4rem, 8vw, 7rem);
+  display: flex;
+  min-height: 100svh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-block: clamp(4rem, 8vw, 7rem);
+  text-align: center;
 }
 
 .hero-title {
   display: grid;
-  gap: 0.05em;
-  max-width: 1100px;
-  margin: 1.1rem 0 0;
+  gap: 0.02em;
+  max-width: 1180px;
+  margin: 0 auto;
   color: var(--fg);
-  font-size: clamp(4.25rem, 13vw, 11.5rem);
-  font-weight: 950;
-  line-height: 0.76;
-  letter-spacing: -0.095em;
+  font-size: clamp(4.25rem, 9.5vw, 9rem);
+  font-weight: 900;
+  line-height: 0.82;
+  letter-spacing: -0.085em;
   text-transform: uppercase;
 }
 
-.hero-title span:nth-child(2) {
-  color: var(--yellow);
+.hero-title span {
+  display: block;
 }
 
-.hero-title span:nth-child(3) {
-  color: var(--fg);
+.hero-title .hero-title-accent {
+  color: var(--yellow);
+  white-space: nowrap;
+}
+
+.hero-lower {
+  margin-top: clamp(3rem, 7vw, 6rem);
 }
 
 .hero-copy {
-  max-width: 700px;
-  margin-top: 1.6rem;
+  max-width: 660px;
+  margin: 0 auto;
   color: var(--muted-strong);
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 400;
+}
+
+.hero .actions {
+  justify-content: center;
+  margin-top: 1.25rem;
 }
 
 /* Marquee */
@@ -327,7 +378,7 @@ p {
   padding-block: 1rem;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  background: rgba(255, 214, 0, 0.045);
+  background: rgba(43, 126, 255, 0.075);
   white-space: nowrap;
 }
 
@@ -342,10 +393,10 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 1.25rem;
-  color: var(--yellow);
+  color: var(--fg);
   font-size: 0.78rem;
-  font-weight: 950;
-  letter-spacing: 0.14em;
+  font-weight: 750;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -383,7 +434,7 @@ p {
 .contact-card {
   color: var(--fg);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.075), var(--card)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.13), var(--card)),
     var(--bg-soft);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
@@ -398,10 +449,10 @@ p {
   margin: 0.45rem 0 0.75rem;
   color: var(--fg);
   font-size: 1.6rem;
-  font-weight: 950;
-  line-height: 0.95;
-  letter-spacing: -0.045em;
-  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-transform: none;
 }
 
 .card p {
@@ -412,8 +463,8 @@ p {
   margin: 0;
   color: var(--yellow);
   font-size: 0.72rem;
-  font-weight: 950;
-  letter-spacing: 0.12em;
+  font-weight: 750;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -440,17 +491,17 @@ p {
   align-items: flex-end;
   padding: 1rem;
   background:
-    radial-gradient(circle at top right, rgba(255, 214, 0, 0.22), transparent 15rem),
-    rgba(255, 255, 255, 0.055);
+    radial-gradient(circle at top right, rgba(43, 126, 255, 0.24), transparent 15rem),
+    rgba(255, 255, 255, 0.075);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
 }
 
 .lookbook-tile span {
-  color: var(--yellow);
+  color: var(--fg);
   font-size: 0.82rem;
-  font-weight: 950;
-  letter-spacing: 0.13em;
+  font-weight: 750;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -458,8 +509,8 @@ p {
   max-width: none;
   padding: clamp(1.5rem, 4vw, 3rem);
   background:
-    radial-gradient(circle at top left, rgba(255, 214, 0, 0.2), transparent 28rem),
-    rgba(255, 255, 255, 0.055);
+    radial-gradient(circle at top left, rgba(43, 126, 255, 0.22), transparent 28rem),
+    rgba(255, 255, 255, 0.075);
 }
 
 .contact-card p {
@@ -478,9 +529,9 @@ p {
   margin: 1rem 0 0;
   color: var(--fg);
   font-size: clamp(3.4rem, 11vw, 9rem);
-  font-weight: 950;
-  line-height: 0.84;
-  letter-spacing: -0.085em;
+  font-weight: 900;
+  line-height: 0.86;
+  letter-spacing: -0.075em;
   text-transform: uppercase;
 }
 
@@ -489,6 +540,7 @@ p {
   margin-top: 1.5rem;
   color: var(--muted-strong);
   font-size: clamp(1rem, 2vw, 1.22rem);
+  font-weight: 400;
 }
 
 /* Drop page */
@@ -502,13 +554,13 @@ p {
 }
 
 .drop-note {
-  color: var(--black);
+  color: var(--fg);
   background: var(--yellow);
   border-radius: 999px;
   padding: 0.65rem 1rem;
   font-size: 0.72rem;
-  font-weight: 950;
-  letter-spacing: 0.1em;
+  font-weight: 750;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -522,7 +574,8 @@ p {
 .product-card {
   overflow: hidden;
   color: var(--fg);
-  background: var(--card);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11), var(--card));
   border: 1px solid var(--line);
   border-radius: 1.5rem;
 }
@@ -532,15 +585,15 @@ p {
   min-height: 18rem;
   place-items: center;
   background:
-    linear-gradient(135deg, rgba(255, 214, 0, 0.98), rgba(255, 214, 0, 0.3)),
+    linear-gradient(135deg, rgba(43, 126, 255, 0.98), rgba(255, 255, 255, 0.24)),
     #111;
 }
 
 .product-image span {
-  color: var(--black);
+  color: var(--fg);
   font-size: 0.78rem;
-  font-weight: 950;
-  letter-spacing: 0.16em;
+  font-weight: 800;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -556,8 +609,8 @@ p {
   margin-bottom: 1rem;
   color: var(--yellow);
   font-size: 0.68rem;
-  font-weight: 950;
-  letter-spacing: 0.12em;
+  font-weight: 750;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -565,10 +618,10 @@ p {
   margin: 0;
   color: var(--fg);
   font-size: 1.35rem;
-  font-weight: 950;
-  line-height: 1;
-  letter-spacing: -0.045em;
-  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-transform: none;
 }
 
 .product-content p {
@@ -595,31 +648,31 @@ p {
   min-width: 5.5rem;
   color: var(--fg);
   background: #050505;
-  border: 1px solid rgba(255, 214, 0, 0.38);
+  border: 1px solid rgba(43, 126, 255, 0.42);
   border-radius: 999px;
   padding: 0.65rem 0.8rem;
-  font-weight: 850;
+  font-weight: 650;
 }
 
 .product-one-size {
-  color: var(--yellow);
-  border: 1px solid rgba(255, 214, 0, 0.38);
+  color: var(--fg);
+  border: 1px solid rgba(43, 126, 255, 0.42);
   border-radius: 999px;
   padding: 0.65rem 0.8rem;
   font-size: 0.72rem;
-  font-weight: 950;
-  letter-spacing: 0.1em;
+  font-weight: 750;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .product-feedback {
   margin: 0 0 1rem;
-  color: var(--black);
+  color: var(--fg);
   background: var(--yellow);
   border-radius: 999px;
   padding: 0.85rem 1rem;
   font-size: 0.78rem;
-  font-weight: 950;
+  font-weight: 750;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -636,7 +689,7 @@ p {
   gap: 1.5rem;
   padding: clamp(1.5rem, 4vw, 3rem);
   background:
-    radial-gradient(circle at top left, rgba(255, 214, 0, 0.16), transparent 28rem),
+    radial-gradient(circle at top left, rgba(43, 126, 255, 0.18), transparent 28rem),
     var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
@@ -649,7 +702,7 @@ p {
 .checkout-box {
   padding: 1.25rem;
   background: #050505;
-  border: 1px solid rgba(255, 214, 0, 0.34);
+  border: 1px solid rgba(43, 126, 255, 0.38);
   border-radius: 1.25rem;
 }
 
@@ -657,8 +710,8 @@ p {
   margin: 0 0 1rem;
   color: var(--yellow);
   font-size: 0.75rem;
-  font-weight: 950;
-  letter-spacing: 0.12em;
+  font-weight: 750;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -668,7 +721,7 @@ p {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.85rem 0;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.78);
   border-bottom: 1px solid var(--line-soft);
 }
 
@@ -699,7 +752,8 @@ p {
   align-items: center;
   padding: 1rem;
   color: var(--fg);
-  background: var(--card);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11), var(--card));
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
 }
@@ -713,18 +767,18 @@ p {
 }
 
 .cart-item-image span {
-  color: var(--black);
+  color: var(--fg);
   font-size: 1.6rem;
-  font-weight: 950;
-  letter-spacing: -0.08em;
+  font-weight: 850;
+  letter-spacing: -0.06em;
 }
 
 .cart-item-label {
   margin: 0 0 0.4rem;
   color: var(--yellow);
   font-size: 0.72rem;
-  font-weight: 950;
-  letter-spacing: 0.12em;
+  font-weight: 750;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -732,10 +786,10 @@ p {
   margin: 0;
   color: var(--fg);
   font-size: 1.6rem;
-  font-weight: 950;
+  font-weight: 800;
   line-height: 1;
-  letter-spacing: -0.045em;
-  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  text-transform: none;
 }
 
 .cart-item > strong {
@@ -758,11 +812,11 @@ p {
   justify-content: center;
   padding: 0 0.75rem;
   color: var(--fg);
-  background: rgba(255, 255, 255, 0.055);
+  background: rgba(255, 255, 255, 0.075);
   border: 1px solid var(--line-soft);
   border-radius: 999px;
   font-size: 0.75rem;
-  font-weight: 900;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -771,7 +825,7 @@ p {
 }
 
 .cart-item-actions button:hover {
-  color: var(--yellow);
+  color: var(--fg);
   border-color: var(--yellow);
 }
 
@@ -782,7 +836,7 @@ p {
   padding: 1.25rem;
   color: var(--fg);
   background:
-    radial-gradient(circle at top left, rgba(255, 214, 0, 0.14), transparent 18rem),
+    radial-gradient(circle at top left, rgba(43, 126, 255, 0.16), transparent 18rem),
     var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
@@ -792,7 +846,7 @@ p {
   padding: clamp(1.5rem, 4vw, 3rem);
   color: var(--fg);
   background:
-    radial-gradient(circle at top left, rgba(255, 214, 0, 0.16), transparent 24rem),
+    radial-gradient(circle at top left, rgba(43, 126, 255, 0.18), transparent 24rem),
     var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
@@ -803,10 +857,10 @@ p {
   margin: 0.35rem 0 1rem;
   color: var(--fg);
   font-size: clamp(2rem, 5vw, 4.5rem);
-  font-weight: 950;
-  line-height: 0.9;
-  letter-spacing: -0.07em;
-  text-transform: uppercase;
+  font-weight: 850;
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+  text-transform: none;
 }
 
 .empty-cart p {
@@ -824,7 +878,7 @@ p {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.9rem 0;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.78);
   border-bottom: 1px solid var(--line-soft);
 }
 
@@ -856,7 +910,8 @@ p {
 .checkout-panel {
   padding: clamp(1.25rem, 3vw, 2rem);
   color: var(--fg);
-  background: var(--card);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11), var(--card));
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
 }
@@ -865,8 +920,8 @@ p {
   margin: 0 0 0.5rem;
   color: var(--yellow);
   font-size: 0.75rem;
-  font-weight: 950;
-  letter-spacing: 0.14em;
+  font-weight: 750;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -874,10 +929,10 @@ p {
   margin: 0 0 1.25rem;
   color: var(--fg);
   font-size: clamp(1.75rem, 3vw, 3rem);
-  font-weight: 950;
-  line-height: 0.95;
-  letter-spacing: -0.055em;
-  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  text-transform: none;
 }
 
 .form-grid {
@@ -893,10 +948,10 @@ p {
 .form-grid label {
   display: grid;
   gap: 0.45rem;
-  color: var(--yellow);
+  color: var(--fg);
   font-size: 0.72rem;
-  font-weight: 950;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -905,7 +960,7 @@ p {
   min-height: 3rem;
   color: var(--fg);
   background: #050505;
-  border: 1px solid rgba(255, 214, 0, 0.32);
+  border: 1px solid rgba(43, 126, 255, 0.36);
   border-radius: 999px;
   padding: 0 1rem;
   outline: none;
@@ -918,7 +973,7 @@ p {
 .stripe-placeholder {
   padding: 1.25rem;
   background: #050505;
-  border: 1px dashed rgba(255, 214, 0, 0.45);
+  border: 1px dashed rgba(43, 126, 255, 0.48);
   border-radius: 1.25rem;
 }
 
@@ -1001,7 +1056,8 @@ button:disabled {
 .story-card {
   padding: clamp(1.5rem, 4vw, 3rem);
   color: var(--fg);
-  background: var(--card);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11), var(--card));
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
 }
@@ -1022,11 +1078,11 @@ button:disabled {
 }
 
 .story-pullout span {
-  color: var(--black);
+  color: var(--fg);
   font-size: clamp(3rem, 8vw, 7rem);
-  font-weight: 950;
-  line-height: 0.78;
-  letter-spacing: -0.09em;
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: -0.08em;
   text-transform: uppercase;
 }
 
@@ -1036,7 +1092,8 @@ button:disabled {
   padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 4rem) 2rem;
   color: var(--fg);
   background:
-    radial-gradient(circle at top left, rgba(255, 214, 0, 0.18), transparent 28rem),
+    radial-gradient(circle at top left, rgba(43, 126, 255, 0.2), transparent 28rem),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.06), transparent 24rem),
     #000;
   border-top: 1px solid var(--line);
 }
@@ -1050,11 +1107,11 @@ button:disabled {
 }
 
 .site-footer-brand {
-  color: var(--yellow);
+  color: var(--fg);
   font-size: clamp(2.4rem, 8vw, 6.5rem);
-  font-weight: 950;
-  line-height: 0.85;
-  letter-spacing: -0.08em;
+  font-weight: 900;
+  line-height: 0.86;
+  letter-spacing: -0.075em;
 }
 
 .site-footer-tagline {
@@ -1074,8 +1131,8 @@ button:disabled {
   margin: 0 0 1rem;
   color: var(--yellow);
   font-size: 0.75rem;
-  font-weight: 950;
-  letter-spacing: 0.14em;
+  font-weight: 750;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -1085,9 +1142,9 @@ button:disabled {
 }
 
 .site-footer-list a {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.76);
   font-size: 0.95rem;
-  font-weight: 750;
+  font-weight: 500;
   transition: color 160ms ease;
 }
 
@@ -1103,7 +1160,7 @@ button:disabled {
   max-width: var(--max-width);
   margin: 4rem auto 0;
   padding-top: 1.25rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   border-top: 1px solid var(--line-soft);
   font-size: 0.76rem;
   letter-spacing: 0.08em;
@@ -1161,23 +1218,23 @@ button:disabled {
     font-size: 0.72rem;
   }
 
-.site-header-actions {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  gap: 0.45rem;
-}
+  .site-header-actions {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    gap: 0.45rem;
+  }
 
-.site-cart-link,
-.site-header-cta {
-  min-height: 2.25rem;
-  padding: 0 0.75rem;
-  font-size: 0.66rem;
-}
+  .site-cart-link,
+  .site-header-cta {
+    min-height: 2.25rem;
+    padding: 0 0.75rem;
+    font-size: 0.66rem;
+  }
 
   .hero-title {
     font-size: clamp(4rem, 20vw, 8rem);
-    line-height: 0.78;
+    line-height: 0.8;
   }
 
   .page-title {
