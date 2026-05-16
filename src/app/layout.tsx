@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { CartProvider } from "@/context/CartContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Step Correct | Streetwear & Stickers",
-  description: "Streetwear, stickers, and limited drops. Move correct. Dress correct.",
+  title: {
+    default: "Step Correct",
+    template: "%s | Step Correct",
+  },
+  description:
+    "Streetwear, stickers, and limited drops. Stand ten toes down. Step correct.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body>{children}</body></html>;
+type RootLayoutProps = {
+  children: ReactNode;
+};
+
+export default function RootLayout({ children }: RootLayoutProps) {
+  return (
+    <html lang="en">
+      <body>
+        <CartProvider>{children}</CartProvider>
+      </body>
+    </html>
+  );
 }
